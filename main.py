@@ -55,7 +55,7 @@ def passwordSecurityScore(password):
 	password_security_score = pow(password_length_score, 2.7) * password_variation_score + 1
 
 	if password_security_score > 10:
-		password_security_score = password_security_score
+		password_security_score = 10
 	elif password_security_score > 8:
 		password_comment = "Very secure password"
 	elif password_security_score > 7:
@@ -83,10 +83,10 @@ def clear():
 
 def hasher(src):
 	clear()
-	print("\tHasher\n======================")
+	global verbose_mode
+	print("\tHasher\n======================\n[1] MD5\n[2] sha256\n[3] sha512")
 
-	print("[1] MD5\n[2] sha256\n[3] sha512")
-	hash_type = input("Hash Algorithym: ")
+	hash_type = input("Hash Algorithm: ")
 
 	password_file = input("Password File Location[Default: resources/passwords.txt]: ")
 	if password_file == "":
@@ -103,8 +103,8 @@ def hasher(src):
 		print("\n[\u001b[31m!\u001b[0m]File does not exist.\n")
 		sleep(3)
 
-	salt = False
 	try:
+		salt = False
 		salt_selection = input("Do you wish to salt?[y/n]").lower()
 		if salt_selection == "y":
 			salt = True
@@ -117,14 +117,15 @@ def hasher(src):
 		sleep(3)
 		main()
 		
-	count = 0
 	print("\nReading file contents...")
+
 	if verbose_mode == True:
 		file_len = fileLen(password_file)
 	write_file = open(hash_file, 'w')
-	print("File contents read.")
-	print("\nStarting Hash...")
+
+	print("File contents read.\n\nStarting Hash...")
 	
+	count = 0
 	for line in open(password_file, errors="ignore"):
 		if salt == True:
 			line += "!Salt!"
@@ -141,35 +142,36 @@ def hasher(src):
 
 def passwordTest():
 	clear()
+	global verbose_mode
 	global match
 	match = False
 	global hash_file
 	global password_file
+	
 	header = "\tPassword Test\n=============================="
 	print(header)
 
-	count = 0
 	hashLookupCheck("passwordTest", header, hash_file)
 
 	txt_input = input("Password: ")
-
-	print("[1] MD5\n[2] sha256\n[3] sha512")
-	hash_type = input("Hash Algorithym: ")
+	hash_type = input("[1] MD5\n[2] sha256\n[3] sha512\nHash Algorithm: ")
 	md5_input = hashType(hash_type, txt_input)
-
 	hash_file = input("Hash File Location[Default: resources/hashes.txt]: ")
+
 	if hash_file == "":
 		hash_file = "resources/hashes.txt"
 	if path.exists(hash_file) == False:
 		print("\n[\u001b[31m!\u001b[0m]Invalid file.")
 		sleep(3)
 		main()
-
 	if verbose_mode == True:
 		print("\nReading file contents...")
 		file_len = fileLen(hash_file)
 		print("File contents read.")
+	
 	print("\nStarting test...")
+	
+	count = 0
 	for line in open(hash_file, errors="ignore"):
 		line = line[:-1]
 		if md5_input == line:
@@ -190,18 +192,19 @@ def passwordTest():
 
 def hashCompare():
 	clear()
+	global verbose_mode
 	global match
 	match = False
 	global hash_file
 	global password_file
+
 	header = "\tHash Comparison\n==============================="
 	print(header)
 	
-	count = 0
 	hashLookupCheck("hashCompare", header, hash_file)
 
 	txt_input = input("Hash: ")
-
+	
 	password_file = input("Password File Location[Default: resources/passwords.txt]: ")
 	if password_file == "":
 		password_file = "resources/passwords.txt"
@@ -223,6 +226,8 @@ def hashCompare():
 		file_len = fileLen(hash_file)
 		print("File contents read.")
 	print("\nStarting comparison...")
+
+	count = 0
 	for line in open(hash_file, errors="ignore"):
 		line = line[:-1]
 		if txt_input == line:
@@ -248,18 +253,18 @@ def hashCompare():
 def main():
 	clear()
 	print('''
- ▄▄▄██▀▀▀██▓▒███████▒ ██▓   ▓█████▄ 
-   ▒██  ▓██▒▒ ▒ ▒ ▄▀░▓██▒   ▒██▀ ██▌
-   ░██  ▒██▒░ ▒ ▄▀▒░ ▒██░   ░██   █▌
-▓██▄██▓ ░██░  ▄▀▒   ░▒██░   ░▓█▄   ▌
- ▓███▒  ░██░▒███████▒░██████░▒████▓ 
- ▒▓▒▒░  ░▓  ░▒▒ ▓░▒░▒░ ▒░▓  ░░░ ▒░ ░
- ▒ ░▒░   ▒ ░░░▒ ▒ ░ ▒░ ░ ▒  ░ ░ ░  ░ 
- ░ ░ ░   ▒ ░░ ░ ░ ░ ░  ░ ░      ░   
- ░   ░   ░    ░ ░        ░  ░   ░  ░    
-            ░                          
+ ▄▄▄██▀▀▀██▓▒███████▒ ██▓    ▓█████ ▓█████▄ 
+   ▒██  ▓██▒▒ ▒ ▒ ▄▀░▓██▒    ▓█   ▀ ▒██▀ ██▌
+   ░██  ▒██▒░ ▒ ▄▀▒░ ▒██░    ▒███   ░██   █▌
+▓██▄██▓ ░██░  ▄▀▒   ░▒██░    ▒▓█  ▄ ░▓█▄   ▌
+ ▓███▒  ░██░▒███████▒░██████▒░▒████▒░▒████▓ 
+ ▒▓▒▒░  ░▓  ░▒▒ ▓░▒░▒░ ▒░▓  ░░░ ▒░ ░ ▒▒▓  ▒ 
+ ▒ ░▒░   ▒ ░░░▒ ▒ ░ ▒░ ░ ▒  ░ ░ ░  ░ ░ ▒  ▒ 
+ ░ ░ ░   ▒ ░░ ░ ░ ░ ░  ░ ░      ░    ░ ░  ░ 
+ ░   ░   ░    ░ ░        ░  ░   ░  ░   ░    
+            ░                        ░      
 ''')
-	global mode
+	global verbose_mode
 	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Enable Verbose Mode\n[0] Exit\n=================================")
 	selection = input("Option: ")
 
@@ -271,6 +276,8 @@ def main():
 		hashCompare()
 	elif selection == "4":
 		verbose_mode = True
+		print("Verbose mode enabled")
+		sleep(2)
 	elif selection == "0":
 		exit()
 	else:
