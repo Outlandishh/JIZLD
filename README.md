@@ -7,8 +7,7 @@ JIZLED is a program for testing password hashes security against commonly used p
 To install via github, enter the following commands
 ```
 git clone https://github.com/Outlandishh/JIZLD.git
-cd JIZLD
-python3 main.py
+python3 ./JIZLD/main.py
 ```
 
 Opening the main.py file should immediately open the program to the homepage where you can select the options
