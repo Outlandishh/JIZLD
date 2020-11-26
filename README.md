@@ -7,25 +7,28 @@ JIZLED is a program for testing password hashes security against commonly used p
 To install via github, enter the following commands
 ```
 git clone https://github.com/Outlandishh/JIZLD.git
-cd JIZLD
-python3 main.py
+python3 ./JIZLD/main.py
 ```
 
 Opening the main.py file should immediately open the program to the homepage where you can select the options
+
+### Adding Wordlists
+
+To add your own wordlist, simply add the file to the /resources/ folder in the JIZLD installation folder. When the program needs input from a password file simply provide the filename of the desired wordlist in the resources folder.
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-works on windows or linux
-minimum 4GB or RAM 8GB recommended
+Works on windows or linux
+Minimum 4GB or RAM 8GB recommended
 
 ```
 
 ## Running the tests
 
-to test a password you will need to create hash files in option 1 to use for the password hash testing 
+To test a password you will need to create hash files in option 1 to use for the password hash testing 
 
 ### Testing breakdown
 
@@ -88,17 +91,18 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **Daniel Holtham** - *Initial work* - [JIZLED](https://JIZLED.com/DH)
-* **Luke Flemming** - *Initial work* - [JIZLED](https://JIZLED.com/LF)
-* **Jeremy Landolfo** - *Initial work* - [JIZLED](https://JIZLED.com/JL)
-* **Istvan Pal** - *Initial work* - [JIZLED](https://JIZLED.com/IP)
-* **Zachary Gothard** - *Initial work* - [JIZLED](https://JIZLED.com/ZG)
+* **Daniel Holtham** - *Initial work* - [JIZLD](https://JIZLED.com/DH)
+* **Luke Flemming** - *Initial work* - [JIZLD](https://JIZLED.com/LF)
+* **Jeremy Landolfo** - *Initial work* - [JIZLD](https://JIZLED.com/JL)
+* **Istvan Pal** - *Initial work* - [JIZLD](https://JIZLED.com/IP)
+* **Zachary Gothard** - *Initial work* - [JIZLD](https://JIZLED.com/ZG)
 
 people who participated in this project.
 
 ## License
 
 This project is absolutely not meant for consumption by the public in any way, shape or form. 
+JIZLD takes no responsibility for harmful or malicious use of this code.
 
 ## Acknowledgments
 
