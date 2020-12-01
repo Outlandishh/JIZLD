@@ -69,7 +69,7 @@ def passwordSecurityScore(password):
 
 	print("Password Score: " + str(password_security_score) + " - " + password_comment)
 
-def fileLen(fname, size=65536):
+def blockRead(fname, size=65536):
     while True:
         b = fname.read(size)
         if not b: break
@@ -121,8 +121,7 @@ def hasher(src):
 
 	if verbose_mode == True:
 		with open(password_file, "r",encoding="utf-8",errors='ignore') as f:
-			file_len = sum(bl.count("\n") for bl in fileLen(f))
-#		file_len = fileLen(password_file)
+			file_len = sum(bl.count("\n") for bl in blockRead(f))
 	write_file = open(hash_file, 'w')
 
 	print("File contents read.\n\nStarting Hash...")
@@ -169,7 +168,7 @@ def passwordTest():
 	if verbose_mode == True:
 		print("\nReading file contents...")
 		with open(hash_file, "r",encoding="utf-8",errors='ignore') as f:
-			file_len = sum(bl.count("\n") for bl in fileLen(f))
+			file_len = sum(bl.count("\n") for bl in blockRead(f))
 		print("File contents read.")
 	
 	print("\nStarting test...")
@@ -227,7 +226,7 @@ def hashCompare():
 	if verbose_mode == True:
 		print("\nReading file contents...")
 		with open(hash_file, "r",encoding="utf-8",errors='ignore') as f:
-			file_len = sum(bl.count("\n") for bl in fileLen(f))
+			file_len = sum(bl.count("\n") for bl in blockRead(f))
 		print("File contents read.")
 	print("\nStarting comparison...")
 
@@ -256,9 +255,9 @@ def hashCompare():
 
 def main():
 	clear()
-	print('''Welcome to the JIZLD Hashing Application v1.0''')
+	print('''Welcome to the JIZLD Hashing Application v1.6''')
 	global verbose_mode
-	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Disable Verbose Mode\n[0] Exit\n=================================")
+	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Disable Verbose Mode\n[9] README\n[0] Exit\n=================================")
 	selection = input("Option: ")
 
 	if selection == "1":
@@ -271,6 +270,14 @@ def main():
 		verbose_mode = False
 		print("Verbose mode disabled")
 		sleep(2)
+	elif selection == "9":
+		clear()
+		try:
+			f = open("README.md", "r")
+			print(f.read())
+		except:
+			print("No README.md found")
+		input("Press Enter to continue...")
 	elif selection == "0":
 		exit()
 	else:
