@@ -252,6 +252,7 @@ def hashCompare():
 
 def main():
 	clear()
+	print('''Welcome to the JIZLD Hashing Application v1.0''')
 	global verbose_mode
 	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Enable Verbose Mode\n[0] Exit\n=================================")
 	selection = input("Option: ")
