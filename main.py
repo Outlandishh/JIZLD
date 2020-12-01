@@ -5,7 +5,7 @@ from time import sleep
 system("title Main")
 match = False
 hash_file = "resources/hashes.txt"
-verbose_mode = False
+verbose_mode = True
 
 def hashType(selection, line):
 	if selection == "1":
@@ -69,11 +69,11 @@ def passwordSecurityScore(password):
 
 	print("Password Score: " + str(password_security_score) + " - " + password_comment)
 
-def fileLen(fname):
-    with open(fname, errors="ignore") as f:
-        for i, l in enumerate(f):
-            pass
-    return i + 1
+def fileLen(fname, size=65536):
+    while True:
+        b = fname.read(size)
+        if not b: break
+        yield b
 
 def clear(): 
 	if name == 'nt':
@@ -120,7 +120,9 @@ def hasher(src):
 	print("\nReading file contents...")
 
 	if verbose_mode == True:
-		file_len = fileLen(password_file)
+		with open(password_file, "r",encoding="utf-8",errors='ignore') as f:
+			file_len = sum(bl.count("\n") for bl in fileLen(f))
+#		file_len = fileLen(password_file)
 	write_file = open(hash_file, 'w')
 
 	print("File contents read.\n\nStarting Hash...")
@@ -133,7 +135,7 @@ def hasher(src):
 		write_file.write(digest + '\n')
 		count += 1
 		if (count/1000000).is_integer() and verbose_mode == True:
-			print(str("%.2f" % (100/(file_len/count))) + "%")
+			print(str("%.2f" % (100/(file_len/count))) + "% - [" + str(count) + "/" + str(file_len) + "] passwords hashed")
 	
 	print("\nHash Completed!")
 	write_file.close()
@@ -166,7 +168,8 @@ def passwordTest():
 		main()
 	if verbose_mode == True:
 		print("\nReading file contents...")
-		file_len = fileLen(hash_file)
+		with open(hash_file, "r",encoding="utf-8",errors='ignore') as f:
+			file_len = sum(bl.count("\n") for bl in fileLen(f))
 		print("File contents read.")
 	
 	print("\nStarting test...")
@@ -183,7 +186,7 @@ def passwordTest():
 			break
 		count += 1
 		if (count/1000000).is_integer() and verbose_mode == True:
-			print(str("%.2f" % (100/(file_len/count))) + "%")
+			print(str("%.2f" % (100/(file_len/count))) + "% - [" + str(count) + "/" + str(file_len) + "] passwords compared")
 
 	if match == False:
 		print("\nNo Match Found.")
@@ -223,7 +226,8 @@ def hashCompare():
 
 	if verbose_mode == True:
 		print("\nReading file contents...")
-		file_len = fileLen(hash_file)
+		with open(hash_file, "r",encoding="utf-8",errors='ignore') as f:
+			file_len = sum(bl.count("\n") for bl in fileLen(f))
 		print("File contents read.")
 	print("\nStarting comparison...")
 
@@ -244,7 +248,7 @@ def hashCompare():
 			break
 			count += 1
 			if (count/1000000).is_integer() and verbose_mode == True:
-				print(str("%.2f" % (100/(file_len/count))) + "%")
+				print(str("%.2f" % (100/(file_len/count))) + "% - [" + str(count) + "/" + str(file_len) + "] passwords compared")
 	
 	if match == False:
 		print("\nNo Match Found.")
@@ -254,7 +258,7 @@ def main():
 	clear()
 	print('''Welcome to the JIZLD Hashing Application v1.0''')
 	global verbose_mode
-	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Enable Verbose Mode\n[0] Exit\n=================================")
+	print("\tSelect an option:\n=================================\n[1] Hasher\n[2] Password Security Check\n[3] Hash Comparison\n[4] Disable Verbose Mode\n[0] Exit\n=================================")
 	selection = input("Option: ")
 
 	if selection == "1":
@@ -264,8 +268,8 @@ def main():
 	elif selection == "3":
 		hashCompare()
 	elif selection == "4":
-		verbose_mode = True
-		print("Verbose mode enabled")
+		verbose_mode = False
+		print("Verbose mode disabled")
 		sleep(2)
 	elif selection == "0":
 		exit()
