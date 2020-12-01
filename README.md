@@ -1,7 +1,7 @@
 # JIZLD
- The JIZLD Hashing Application v1.0
+ The JIZLD Hashing Application v1.6
 
-JIZLED is a program for testing password hashes security against commonly used passwords to prevent brute force attacks
+JIZLD is a program for testing password hashes security against commonly used passwords to prevent brute force attacks
 
 ## Getting Started
 To install via github, enter the following commands
@@ -68,7 +68,7 @@ select the hash file location that is being used
 the program will test the password and give the results
 ```
 
-Option 4 'Enable fancy mode'
+Option 4 'Enable verbose mode'
 
 ```
 Enables verbose mode which will produce detailed output for diagnostic purposes
