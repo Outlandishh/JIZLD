@@ -7,7 +7,8 @@ JIZLED is a program for testing password hashes security against commonly used p
 To install via github, enter the following commands
 ```
 git clone https://github.com/Outlandishh/JIZLD.git
-python3 ./JIZLD/main.py
+cd JIZLD/
+python3 main.py
 ```
 
 Opening the main.py file should immediately open the program to the homepage where you can select the options
@@ -91,11 +92,11 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **Daniel Holtham** - *Initial work* - [JIZLD](https://JIZLED.com/DH)
-* **Luke Flemming** - *Initial work* - [JIZLD](https://JIZLED.com/LF)
-* **Jeremy Landolfo** - *Initial work* - [JIZLD](https://JIZLED.com/JL)
-* **Istvan Pal** - *Initial work* - [JIZLD](https://JIZLED.com/IP)
-* **Zachary Gothard** - *Initial work* - [JIZLD](https://JIZLED.com/ZG)
+* **Daniel Holtham** - *Initial work* - [JIZLD](https://JIZLD.com/DH)
+* **Luke Flemming** - *Initial work* - [JIZLD](https://JIZLD.com/LF)
+* **Jeremy Landolfo** - *Initial work* - [JIZLD](https://JIZLD.com/JL)
+* **Istvan Pal** - *Initial work* - [JIZLD](https://JIZLD.com/IP)
+* **Zachary Gothard** - *Initial work* - [JIZLD](https://JIZLD.com/ZG)
 
 people who participated in this project.
 
