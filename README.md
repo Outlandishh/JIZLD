@@ -68,10 +68,10 @@ select the hash file location that is being used
 the program will test the password and give the results
 ```
 
-Option 4 'Enable verbose mode'
+Option 4 'Disable verbose mode'
 
 ```
-Enables verbose mode which will produce detailed output for diagnostic purposes
+Disables verbose, producing a streamlined output
 ```
 
 Option 5 'Exit'
